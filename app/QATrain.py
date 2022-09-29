@@ -5,8 +5,7 @@ import torch
 import torch.nn as nn
 #importing nltk and necessary downloads
 import nltk
-
-from app.dataset import generateJson, readIntent
+from dataset import generateJson, readIntent
 
 nltk.download('punkt')
 #Im using porter stemmer here
