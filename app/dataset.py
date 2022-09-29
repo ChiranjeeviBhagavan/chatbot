@@ -16,13 +16,13 @@ data={"intents":[
 }
 
 import json
-def writeTOJsonFile(path, data):
+def generateJson(path, data):
   filepathname='./'+'financial_data'+'.json'
   print(filepathname)
   with open(filepathname,'w') as fp:
     json.dump(data,fp)
 
-writeTOJsonFile('./',data)
+generateJson('./', data)
 
 def readIntent():
   with open('./financial_data.json', 'r') as f:

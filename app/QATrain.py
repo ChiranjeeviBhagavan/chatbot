@@ -6,7 +6,7 @@ import torch.nn as nn
 #importing nltk and necessary downloads
 import nltk
 
-from app.dataset import writeTOJsonFile, readIntent
+from app.dataset import generateJson, readIntent
 
 nltk.download('punkt')
 #Im using porter stemmer here
@@ -62,3 +62,32 @@ tags = sorted(set(tags))
 print(len(pair), "patterns")
 print(len(tags), "tags:", tags)
 print(len(all_the_words), "unique stemmed words:", all_the_words)
+
+
+# create training data
+X_train = []
+y_train = []
+#using a tuple to run through the pair
+for (pattern_sentence, tag) in pair:
+    # X-->is the bag of words for each pattern_sentence
+    bag = BagOfWords(pattern_sentence, all_the_words)
+    X_train.append(bag)
+    # y: PyTorch CrossEntropyLoss needs only class labels, not one-hot.so defining label
+    label = tags.index(tag)
+    y_train.append(label)
+#array
+X_train = np.array(X_train)
+y_train = np.array(y_train)
+
+# Hyper-parameters are--->
+num_epochs = 1000
+batch_size = 8
+learning_rate = 0.001
+#len(X_train[0]) means the length of 1st bag of words because they all have the same size.
+#if we want we can just print and check. But its clear here.
+input_size = len(X_train[0])
+hidden_size = 8
+output_size = len(tags)
+#lets print the values
+print("inputsize=",input_size)
+print("outputsize=",output_size)
