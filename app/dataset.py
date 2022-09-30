@@ -22,9 +22,11 @@ def generateJson(path, data):
   with open(filepathname,'w') as fp:
     json.dump(data,fp)
 
-generateJson('./', data)
+#generateJson('./', data)
 
 def readIntent():
-  with open('./financial_data.json', 'r') as f:
+  with open('./finance_DATA.json', 'r') as f:
     intents = json.load(f)
   return intents
+
+#readIntent()
